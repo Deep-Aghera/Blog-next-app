@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card } from "@chakra-ui/react";
+// import { Button, Card } from "@chakra-ui/react";
 import { openDB } from 'idb';
-import TableComponent from "@/components/TableComponent";
 import TableReads from '@/components/TableReads';
 const Test = () => {
   const [posts, setPosts] = useState([]);

@@ -20,7 +20,7 @@ const ShortBlog = ({
   );
 
   return (
-    <div className="m-10 max-w-md max-h-650 ">
+    <div className="m-10 max-w-md max-h-650 text-white-600">
       <div className="bg-black shadow-lg p-4 rounded-lg">
         <div className="flex space-x-4 items-center p-3">
           <h1 className="text-lg font-bold">{title}</h1>
@@ -34,7 +34,7 @@ const ShortBlog = ({
             objectFit="cover"
             src={blogImageUrl}
             alt="blog content image"
-            quality={10}
+            
           />
         </div>
         <div className="max-h-140 overflow-hidden p-3">
