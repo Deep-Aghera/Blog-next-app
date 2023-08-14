@@ -5,7 +5,7 @@ import { BsFillJournalBookmarkFill } from 'react-icons/bs';
 
 function Header() {
   const { status, ...rest} = useSession()
-  //console.log({status, rest})
+
   return (
     <div className="flex flex-row bg-neutral-800  p-4 text-white">
       <div className="w-1/4 md:w-1/3">

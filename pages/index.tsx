@@ -36,7 +36,7 @@ function Home({ posts } : any) {
       {posts.map((post : any) => {
         const { name, bio, image } = post.author;
         const imageUrl = memoizedUrlFor(post.mainImage.asset._ref).width(240).height(240).url();
-        const avatarImageUrl = memoizedUrlFor(image.asset._ref).width(240).height(240).blur(10).url();
+        const avatarImageUrl = memoizedUrlFor(image.asset._ref).width(240).height(240).url();
 
         return (
           <ShortBlog

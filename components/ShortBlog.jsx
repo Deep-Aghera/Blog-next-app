@@ -20,12 +20,12 @@ const ShortBlog = ({
   );
 
   return (
-    <div className="m-10 max-w-md max-h-650 text-white-600">
-      <div className="bg-black shadow-lg p-4 rounded-lg">
+    <div className="m-10 max-w-md max-h-650">
+      <div className="bg-white shadow-lg p-4 rounded-lg">
         <div className="flex space-x-4 items-center p-3">
           <h1 className="text-lg font-bold">{title}</h1>
         </div>
-        <div className="w-full max-h-300 overflow-hidden p-3">
+        <div className="w-full max-h-200 overflow-hidden p-3">
           <Image
           
             layout="responsive"
@@ -58,11 +58,13 @@ const ShortBlog = ({
         <div className="flex justify-center">
           <AiOutlineRead className={readIconColor} size={30} />
         </div>
+        <div className="flex justify-center">
         <button className="bg-blue-500 text-white px-4 py-2 rounded mt-2">
           <Link href={`/blogs/${slug}`} passHref>
             Read This Blog Now
           </Link>
         </button>
+        </div>
       </div>
     </div>
   );
