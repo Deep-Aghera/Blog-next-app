@@ -16,7 +16,7 @@ function Header() {
         </Link>
       </div>
       <div className="w-1/4 md:w-1/3">
-        <Link href="/reading-list">
+        <Link href="/test">
           <span className="text-lg md:text-xl font-semibold">
           <BsFillJournalBookmarkFill size ={'30px'} />
           </span>
@@ -32,11 +32,8 @@ function Header() {
       </div>) : null}
      
      {(status === 'unauthenticated')||(status === 'loading') ? (<div className="w-1/2 md:w-1/3">
-      <Link href='/api/auth/signin'>
-              <p className="text-lg md:text-xl font-semibold" onClick={e => {
-                e.preventDefault()
-                signIn('github')
-              }}> Sign In</p> 
+      <Link href='/login'>
+              <p className="text-lg md:text-xl font-semibold" > Log In</p> 
               
             </Link>
       </div>): null} 

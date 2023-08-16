@@ -40,6 +40,7 @@ function Home({ posts } : any) {
 
         return (
           <ShortBlog
+            subBody = {post.subBody}
             key={post._id}
             bio={bio[0].children[0].text}
             author={name}

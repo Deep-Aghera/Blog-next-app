@@ -1,34 +1,33 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Box, Text, Button, Flex, Card, Avatar } from '@chakra-ui/react';
-import {signOut, useSession } from 'next-auth/react'
-const Profile = (props : any) => {
-  const { status, data} = useSession()
-  
+import { signOut, useSession } from 'next-auth/react';
+
+const Profile = () => {
+  const { status, data } = useSession();
+
   return (
-   
-      <Card height={300} p='6'>
-        <Box display='flex' alignItems='center' justifyContent='center' mb='4'>
-          <Avatar size='xl' name={data?.user?.name || ""} src={data?.user?.image || ''} />
-        </Box>
-        <Text fontSize='lg' fontWeight='bold'>
-          Name: {data?.user?.name}
-        </Text>
-        <Text fontSize='md' >
-          Email: {data?.user?.email}
-        </Text>
-        <Flex justifyContent='center' mt='4'>
-          <Button colorScheme='red' onClick={e => {
-            e.preventDefault()
-            signOut({ callbackUrl: 'http://localhost:3000/' })
-           
-          }}>Sign Out</Button>
-        </Flex>
-      </Card>
-    
+    <div className="bg-white max-h-64	 rounded-lg shadow-lg p-6">
+      <div className="flex items-center justify-center mb-4">
+        <img
+          className="w-24 h-24 rounded-full object-cover"
+          src={data?.user?.image || ''}
+          alt={data?.user?.name || ''}
+        />
+      </div>
+      <p className="text-lg font-semibold text-center">{data?.user?.name}</p>
+      <p className="text-md text-center">{data?.user?.email}</p>
+      <div className="flex justify-center mt-4">
+        <button
+          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+          onClick={(e) => {
+            e.preventDefault();
+            signOut({ callbackUrl: 'http://localhost:3000/' });
+          }}
+        >
+          Sign Out
+        </button>
+      </div>
+    </div>
   );
 };
-
-Profile.propTypes = {};
 
 export default Profile;
