@@ -21,8 +21,8 @@ const Blog = ({ post }: any) => {
   const blogImageURL = urlFor(post[0].mainImage.asset._ref).url();
   //const avatarImageUrl = urlFor(post.author.image.asset._ref).url();
   //  const blogImageURL = 'https://images.unsplash.com/photo-1691036562132-56a310d4b789?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80';
-
-  const blogAuthorName = "Mikhai nami";
+  // const blogAuthorName = "Mikhai nami";
+  
   const { status, ...rest} = useSession()
   const router = useRouter()
   async function handleOnReadChange(id : any) {
@@ -34,7 +34,13 @@ const Blog = ({ post }: any) => {
     const db = await initIndexedDB();
     const fetchRead = await fetchPostById(db,id)
     const newInRead = !fetchRead.inRead
-    const updatedRead = await updateReadStatus(db, id, newInRead);
+    try {
+      await updateReadStatus(db, id, newInRead);
+      
+    } catch (error : any) {
+      alert(error.message)
+      return
+    }
 
 
     
@@ -112,6 +118,7 @@ export async function getStaticProps(context: any) {
     props: {
       post: data,
     },
+    revalidate: 10, 
   };
 }
 

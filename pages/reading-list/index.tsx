@@ -1,14 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { client } from "@/sanityClientConfig/sanity";
-import TableComponent from "@/components/TableComponent";
+//import TableComponent from "@/components/TableComponent";
+import TableReads from "@/components/TableReads";
 
 const ReadingList = ({ posts } : any) => {
 
  
   return (
     
-      <TableComponent data={posts} />
+      <TableReads data={posts} />
     
   );
 };
@@ -37,6 +38,7 @@ export async function getStaticProps() {
     props: {
       posts: data,
     },
+    revalidate: 10, 
   };
 }
 

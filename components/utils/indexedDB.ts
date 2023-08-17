@@ -24,7 +24,7 @@ export async function updatePostsWithReadStatus(db:any, data:any) {
   return updatedPosts;
 }
 
-export async function fetchPostById(db:any, id:any) {
+export async function fetchPostById(db:any, id:string) {
   const tx = db.transaction('readingList', 'readonly');
   const store = tx.objectStore('readingList');
 
@@ -32,8 +32,12 @@ export async function fetchPostById(db:any, id:any) {
   return post;
 }
 
-export async function updateReadStatus(db:any, id:any, inRead:any) {
-  
+export async function updateReadStatus(db:any, id:string, inRead:boolean) {
+
+  const count = await countInReads()
+  if(count >= 5 && inRead === true) {
+    throw new Error('More Than 5 Bookmark not acceptable');
+  }
   const tx = db.transaction('readingList', 'readwrite');
   const store = tx.objectStore('readingList');
 
@@ -42,17 +46,17 @@ export async function updateReadStatus(db:any, id:any, inRead:any) {
   return inRead;
 }
 
-// async function countInReads() {
-//   let count = 0
-//    const db = await initIndexedDB();
-//    const tx = db.transaction('readingList', 'readonly');
-//    const store = tx.objectStore('readingList');
-//    const data = await store.getAll()
-//    data.map((item) => {
-//     if(item.inRead === true) {
-//       count++
-//     }
-//    })
-//    console.log(data,count);
-//    return count
-// }
+async function countInReads() {
+  let count = 0
+   const db = await initIndexedDB();
+   const tx = db.transaction('readingList', 'readonly');
+   const store = tx.objectStore('readingList');
+   const data = await store.getAll()
+   data.map((item) => {
+    if(item.inRead === true) {
+      count++
+    }
+   })
+   console.log(data,count);
+   return count
+}

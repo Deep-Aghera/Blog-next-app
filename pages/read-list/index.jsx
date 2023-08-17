@@ -4,7 +4,7 @@ import { initIndexedDB, updatePostsWithReadStatus, updateReadStatus } from '../.
 
 const Test = () => {
   const [posts, setPosts] = useState([]);
-
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     const fetchPost = async () => {
       const response = await fetch('/api/posts');
@@ -13,6 +13,7 @@ const Test = () => {
       const db = await initIndexedDB();
       const updatedPosts = await updatePostsWithReadStatus(db, data);
       setPosts(updatedPosts);
+      setLoading(false)
     };
 
     fetchPost();
@@ -22,7 +23,13 @@ const Test = () => {
     const db = await initIndexedDB();
     const post = posts.find(item => item._id === id);
     const newInRead = !post.inRead;
-    await updateReadStatus(db, id, newInRead);
+    try {
+      await updateReadStatus(db, id, newInRead);
+      
+    } catch (error) {
+      alert(error)
+      return
+    }
 
     setPosts(prevPosts =>
       prevPosts.map(item => (item._id === id ? { ...item, inRead: newInRead } : item))
@@ -32,7 +39,7 @@ const Test = () => {
 
   return (
     <>
-      <TableReads data={posts} onReadChange={handleOnReadChange} />
+     {loading ? <h1>Loading...</h1> : <TableReads data={posts} onReadChange={handleOnReadChange} /> } 
     </>
   );
 };

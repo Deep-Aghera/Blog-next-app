@@ -46,10 +46,10 @@ function Home({ posts } : any) {
             author={name}
             avatarImageUrl={avatarImageUrl}
             id={post._id}
-            readingList={post.readingList}
+           
             blogImageUrl={imageUrl}
             title={post.title}
-            body={post.body[0].children[0].text}
+           
             slug={post.slug.current}
           />
         );
@@ -65,6 +65,7 @@ export async function getStaticProps() {
     props: {
       posts,
     },
+    revalidate: 10, 
   };
 }
 
