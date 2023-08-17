@@ -15,7 +15,6 @@ function urlFor(source: any) {
 }
 
 const Blog = ({ post }: any) => {
-  console.log(post)
   const { title } = post[0];
   const body = post[0].body;
   const author = post[0].author.name;
@@ -34,12 +33,9 @@ const Blog = ({ post }: any) => {
     }
     const db = await initIndexedDB();
     const fetchRead = await fetchPostById(db,id)
-    console.log("fetched id",fetchRead.inRead)
     const newInRead = !fetchRead.inRead
-    console.log(newInRead)
     const updatedRead = await updateReadStatus(db, id, newInRead);
 
-    console.log(updatedRead)
 
     
   }

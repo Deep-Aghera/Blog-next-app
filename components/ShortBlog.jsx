@@ -28,7 +28,7 @@ const ShortBlog = ({
 
       const db = await initIndexedDB();
       const updatedPosts = await updatePostsWithReadStatus(db, data);
-      console.log(updatedPosts);
+     
       setPosts(updatedPosts);
     };
 

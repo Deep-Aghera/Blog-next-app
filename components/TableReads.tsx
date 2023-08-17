@@ -14,7 +14,7 @@ function handleClick() {
   console.log('hello')
 }
 
-const TableReads = ({ data, onReadChange }) => {
+const TableReads = ({ data, onReadChange } :  any) => {
   console.log("data in tabelReads", data);
 
   return (
@@ -32,7 +32,7 @@ const TableReads = ({ data, onReadChange }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => {
+            {data.map((item : any) => {
               const imageUrl = urlFor(item.mainImage.asset._ref).url();
               return (
                 <tr key={item._id} className="border-b border-purple-500">

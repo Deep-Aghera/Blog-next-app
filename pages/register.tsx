@@ -8,9 +8,9 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
-  const handleRegister = async (e) => {
+  const handleRegister = async (e : any) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -18,7 +18,7 @@ const Register = () => {
       return;
     }
 
-    setError(null);
+    setError('');
 
     try {
       const response = await fetch('https://impishthought.backendless.app/api/users/register', {

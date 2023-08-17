@@ -8,17 +8,17 @@ const logIn = () => {
   const [error, setError] = useState(null);
   const router = useRouter();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event : any) => {
     event.preventDefault();
-    console.log("Inside log in", email, password);
+   
 
     try {
-      const result = await signIn("credentials", {
+      const result : any = await signIn("credentials", {
         redirect: false,
         Email: email,
         Password: password,
       });
-      console.log(result);
+   
 
       if (result.ok) {
         router.push("/");
@@ -26,7 +26,7 @@ const logIn = () => {
       if (result.error) {
         setError(result.error);
       }
-    } catch (error) {
+    } catch (error : any) {
       setError(error.message);
     }
   };

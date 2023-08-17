@@ -13,7 +13,7 @@ export const authOption = {
                 Password: { label: 'Password', type: 'password', placeholder: 'enter your password' }
             },
             async authorize(cred, req) {
-              console.log("inside nextauth")
+             
                 let res = await fetch(`${AUTH_RESTPOINT}/users/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -40,7 +40,7 @@ export const authOption = {
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
         async jwt({ token, user }) {
-            console.log(user);
+
             // if (user?.id) {
             //     token.id = user.id
             // }

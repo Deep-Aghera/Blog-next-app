@@ -12,7 +12,6 @@ const Test = () => {
 
       const db = await initIndexedDB();
       const updatedPosts = await updatePostsWithReadStatus(db, data);
-      console.log(updatedPosts);
       setPosts(updatedPosts);
     };
 
@@ -29,7 +28,6 @@ const Test = () => {
       prevPosts.map(item => (item._id === id ? { ...item, inRead: newInRead } : item))
     );
 
-    console.log('from the update', posts);
   }
 
   return (
