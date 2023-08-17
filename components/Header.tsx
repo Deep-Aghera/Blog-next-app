@@ -16,7 +16,7 @@ function Header() {
         </Link>
       </div>
       <div className="w-1/4 md:w-1/3">
-        <Link href="/test">
+        <Link href="/read-list">
           <span className="text-lg md:text-xl font-semibold">
           <BsFillJournalBookmarkFill size ={'30px'} />
           </span>

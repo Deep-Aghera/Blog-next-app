@@ -38,6 +38,7 @@ const ShortBlog = ({
   async function handleOnReadChange(id) {
     if((status === 'unauthenticated')||(status === 'loading')) {
       router.push('/login')
+      return
     }
     const db = await initIndexedDB();
     const post = posts.find(item => item._id === id);

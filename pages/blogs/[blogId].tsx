@@ -1,17 +1,21 @@
 import React from "react";
-import PropTypes from "prop-types";
 import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 import { client, getPosts } from "@/sanityClientConfig/sanity";
 import Head from "next/head";
 import { PortableText } from "@portabletext/react";
 import RichTextComponents from "@/components/utils/RichTextComponents";
+import { AiOutlineRead } from "react-icons/ai";
+import { initIndexedDB, updateReadStatus, fetchPostById} from '../../components/utils/indexedDB';
+import { signIn, signOut, useSession } from 'next-auth/react'
+import { useRouter } from "next/router";
 function urlFor(source: any) {
   const builder = imageUrlBuilder(client);
   return builder.image(source);
 }
 
 const Blog = ({ post }: any) => {
+  console.log(post)
   const { title } = post[0];
   const body = post[0].body;
   const author = post[0].author.name;
@@ -20,6 +24,26 @@ const Blog = ({ post }: any) => {
   //  const blogImageURL = 'https://images.unsplash.com/photo-1691036562132-56a310d4b789?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80';
 
   const blogAuthorName = "Mikhai nami";
+  const { status, ...rest} = useSession()
+  const router = useRouter()
+  async function handleOnReadChange(id : any) {
+    
+    if((status === 'unauthenticated')||(status === 'loading')) {
+      router.push('/login')
+      return
+    }
+    const db = await initIndexedDB();
+    const fetchRead = await fetchPostById(db,id)
+    console.log("fetched id",fetchRead.inRead)
+    const newInRead = !fetchRead.inRead
+    console.log(newInRead)
+    const updatedRead = await updateReadStatus(db, id, newInRead);
+
+    console.log(updatedRead)
+
+    
+  }
+
 
   return (
     <>
@@ -36,7 +60,12 @@ const Blog = ({ post }: any) => {
           <hr />
 
           <Image src={blogImageURL} width={700} height={600} alt="Blog Image" />
-
+          <button
+            onClick={() => handleOnReadChange(post[0]._id)}
+            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          >
+            <AiOutlineRead size={30} />
+          </button>
           <PortableText value={body} components={RichTextComponents} />
 
           {author}

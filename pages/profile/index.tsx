@@ -9,7 +9,7 @@ const Profile = () => {
       <div className="flex items-center justify-center mb-4">
         <img
           className="w-24 h-24 rounded-full object-cover"
-          src={data?.user?.image || ''}
+          src={`https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png`}
           alt={data?.user?.name || ''}
         />
       </div>

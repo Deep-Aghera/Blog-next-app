@@ -11,7 +11,7 @@ export default function App({ Component, pageProps: {session, ...pageProps} }: A
           <SessionProvider session={session}>
            
             <Header />
-            <div className='flex justify-center  min-h-screen bg-gradient-to-br from-purple-400 to-indigo-600 p-10' >
+            <div className='flex flex-wrap justify-center  min-h-screen bg-gradient-to-br from-purple-400 to-indigo-600 p-10' >
 
                     <Component {...pageProps} />
             </div>
